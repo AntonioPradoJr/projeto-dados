@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: fct_pedidos_clientes
+    columns:
+      - name: segmento
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['varejo', 'atacado']
+      - name: total_vendas
+        tests:
+          - not_null
