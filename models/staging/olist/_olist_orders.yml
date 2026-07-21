@@ -1,0 +1,176 @@
+version: 2
+
+models:
+# =======================================================================
+# STG_OLIST_CUSTOMER
+# =======================================================================
+  - name: stg_olist_customers
+    description: "Modelo de usuários"
+    columns:
+      - name: customer_id
+        description: "ID do usuário"
+        tests:
+          - not_null
+      
+      - name: customer_unique_id
+        description: " ID unico do usuário"
+        tests:
+          - not_null
+      
+      - name: customer_zip_code_prefix
+        description: "Codigo ZIP do usuário"
+        tests:
+          - not_null
+
+      - name: customer_city
+        description: "Cidade do usuário"
+        tests:
+          - not_null
+
+      - name: customer_state
+        description: "Estado do usuário"
+        tests:
+          - not_null
+# =======================================================================
+# STG_OLIST_ORDERS
+# =======================================================================
+  - name: stg_olist_orders
+    description: "Modelo de pedidos"
+    columns:
+      - name: order_id
+        description: "ID do pedido"
+        tests:
+          - not_null
+
+      - name: order_item_id
+        description: "ID do item comprado"
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: "ID do usuário comprador"
+        tests:
+          - not_null
+
+      - name: seller_id
+        description: "ID do vendedor"
+        tests:
+          - not_null
+
+      - name: status
+        description: "Status do pedido"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['delivered', 'canceled']
+
+      - name: data_compra
+        description: "Data da compra"
+        tests:
+          - not_null
+
+      - name: data_aprovacao_pagamento
+        description: "Data da aprovação do pagamento"
+        tests:
+          - not_null
+
+      - name: data_estimativa_entrega
+        description: "Data da estimativa da entrega"
+        tests:
+          - not_null
+
+      - name: data_entregue_transportadora
+        description: "Data da entrega para transportadora "
+        tests:
+          - not_null
+
+      - name: data_entregue_cliente
+        description: "Data da entrega para cliente"
+        tests:
+          - not_null
+
+# =======================================================================
+# STG_OLIST_SELLERS
+# =======================================================================
+
+  - name: stg_olist_sellers
+    description: "Modelo de fornecedor"
+    columns:
+      - name: seller_id
+        description: "ID do fornecedor"
+        tests:
+          - not_null
+      
+      - name: seller_city
+        description: "Cidado do fornecedor"
+        tests: 
+          - not_null
+
+      - name: seller_state
+        description: "Estado do fornecedor"
+        tests: 
+          - not_null
+
+      - name: seller_zip_code_prefix
+        description: "Prefixo do codigo ZIP do fornecedor"
+        tests: 
+          - not_null
+
+# =======================================================================
+# STG_OLIST_PRODUCTS
+# =======================================================================
+
+  - name: stg_olist_products
+    description: "Modelo de produtos"
+    columns:
+      - name: product_id
+        description: "ID do produto"
+        tests:
+          - not_null
+
+      - name: product_category_name
+        description: "Categoria do produto"
+        tests:
+          - not_null
+
+# =======================================================================
+# STG_OLIST_PAYMENTS
+# =======================================================================
+
+  - name: stg_olist_payments
+    description: "Modelo de pagamentos"
+    columns:
+      - name: order_id
+        description: "ID do pedido"
+        tests:
+          - not_null
+
+      - name: payment_type
+        description: "Tipo do pagamento do pedido"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments: 
+                values: ['credit_card', 'boleto', 'voucher', 'debit_card']
+
+      - name: payment_installments
+        description: "Quantidade de parcelas do pedido"
+        tests:
+          - not_null
+
+      - name: price
+        description: "Preço do pedido"
+        tests:
+          - not_null
+
+      - name: freight_value
+        description: "Preço do frete do pedido"
+        tests:
+          - not_null  
+
+      - name: payment_value
+        description: "Valor do pagamento do pedido"
+        tests:
+          - not_null  
+       
