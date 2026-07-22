@@ -1,0 +1,38 @@
+version: 2
+
+models:
+# =======================================================================
+# DIM_CUSTOMERS
+# =======================================================================
+  - name: dim_customers
+    description: "Modelo de dimensão dos usuários"
+    columns:
+      - name: customer_unique_id
+        description: "ID único do usuário"
+        tests:
+          - not_null
+          - unique
+
+      - name: qtd_pedidos
+        description: "Quantidade de pedidos feitos pelo usuário"
+        tests:
+          - not_null
+
+      - name: data_primeira_compra
+        description: "Data do primeiro pedido"
+        tests:
+          - not_null
+      
+      - name: data_ultima_compra
+        description: "Data do ultimo pedido"
+
+      - name: recorrente
+        description: "Recorrencia de pedido do usuário"
+        tests:
+          - accepted_values:
+              arguments: 
+                values: ['true', 'false']
+          
+
+
+  

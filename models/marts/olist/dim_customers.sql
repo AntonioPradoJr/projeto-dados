@@ -7,13 +7,11 @@ olist_orders AS (
 )
 
 SELECT
-    oc.customer_unique_id,
-    oc.customer_city,
-    oc.customer_state,
+    oc.customer_unique_id      AS customer_unique_id,
     COUNT(oo.order_id)         AS qtd_pedidos,
     MIN(oo.data_compra)        AS data_primeira_compra,
     MAX(oo.data_compra)        AS data_ultima_compra,
-    COUNT(oo.order_id) > 1     AS recorrente 
+    CAST(COUNT(oo.order_id) > 1 AS STRING) AS recorrente
     
 FROM
     olist_customers oc
@@ -23,6 +21,4 @@ ON
     oc.customer_id = oo.customer_id
 
 GROUP BY
-     oc.customer_unique_id, 
-     oc.customer_city, 
-     oc.customer_state
+     oc.customer_unique_id
