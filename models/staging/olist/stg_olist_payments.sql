@@ -10,5 +10,6 @@ SELECT
     CAST(price AS FLOAT64)                      AS price,
     CAST(freight_value AS FLOAT64)              AS freight_value,
     CAST(payment_value AS FLOAT64)              AS payment_value
+    
 FROM
     source

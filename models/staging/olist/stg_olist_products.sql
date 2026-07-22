@@ -12,5 +12,6 @@ SELECT
     CAST(product_length_cm AS FLOAT64)                  AS product_length_cm,
     CAST(product_height_cm AS FLOAT64)                  AS product_height_cm,
     CAST(product_width_cm AS FLOAT64)                   AS product_width_cm
+    
 FROM
     source

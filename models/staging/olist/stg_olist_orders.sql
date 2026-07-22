@@ -13,6 +13,7 @@ SELECT
     DATE(order_estimated_delivery_date)         AS data_estimativa_entrega,
     DATE(order_delivered_carrier_date)          AS data_entregue_transportadora,
     DATE(order_delivered_customer_date)         AS data_entregue_cliente
+    
 FROM
     source
 
