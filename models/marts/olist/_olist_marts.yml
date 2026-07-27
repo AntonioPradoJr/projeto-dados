@@ -123,7 +123,7 @@ models:
                 values: ['boleto', 'debit_card', 'voucher', 'credit_card']
 
       - name: qtd_pagamento_metodo
-        description: "Valor que cada método de pagamento tem acumulado em pedidos"
+        description: "Quantidade de vezes que o metodo de pagamento foi utilizado"
         tests:
           - not_null
       
