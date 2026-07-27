@@ -2,7 +2,7 @@ WITH olist_products AS(
     SELECT * FROM {{ ref('stg_olist_products') }}
 )
 
-SELECT 
+SELECT DISTINCT
     product_id,
     product_category_name,
     product_weight_g,
