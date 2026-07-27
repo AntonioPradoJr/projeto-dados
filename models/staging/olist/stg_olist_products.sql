@@ -1,0 +1,17 @@
+WITH source AS(
+    SELECT * FROM {{ source('raw','olist_orders')}}
+)
+
+SELECT
+    product_id,
+    LOWER(product_category_name)                        AS product_category_name,
+    CAST(product_name_lenght AS FLOAT64)                AS product_name_lenght,
+    CAST(product_description_lenght AS FLOAT64)         AS product_description_lenght,
+    CAST(product_photos_qty AS FLOAT64)                 AS product_photos_qty,
+    CAST(product_weight_g AS FLOAT64)                   AS product_weight_g,
+    CAST(product_length_cm AS FLOAT64)                  AS product_length_cm,
+    CAST(product_height_cm AS FLOAT64)                  AS product_height_cm,
+    CAST(product_width_cm AS FLOAT64)                   AS product_width_cm
+    
+FROM
+    source

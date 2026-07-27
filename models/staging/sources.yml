@@ -7,3 +7,4 @@ sources:
     tables:
       - name: pedidos
       - name: clientes
+      - name: olist_orders

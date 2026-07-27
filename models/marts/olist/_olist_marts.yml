@@ -1,0 +1,144 @@
+version: 2
+
+models:
+  # =======================================================================
+  # DIM_CUSTOMERS
+  # =======================================================================
+  - name: dim_customers
+    description: "Modelo de dimensão dos usuários"
+    columns:
+      - name: customer_unique_id
+        description: "ID único do usuário"
+        tests:
+          - not_null
+          - unique
+
+      - name: qtd_pedidos
+        description: "Quantidade de pedidos feitos pelo usuário"
+        tests:
+          - not_null
+
+      - name: data_primeira_compra
+        description: "Data do primeiro pedido"
+        tests:
+          - not_null
+
+      - name: data_ultima_compra
+        description: "Data do ultimo pedido"
+
+      - name: recorrente
+        description: "Recorrencia de pedido do usuário"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["true", "false"]
+
+  # =======================================================================
+  # DIM_PRODUCTS
+  # =======================================================================
+  - name: dim_products
+    description: "Modelo de dimensão dos produtos"
+    columns:
+      - name: product_id
+        description: "ID único do produto"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_category_name
+        description: "Categoria do produto"
+        tests:
+          - not_null
+
+      - name: product_weight_g
+        description: "Peso produto gramas"
+        tests:
+          - not_null
+
+      - name: categoria_peso
+        description: "Categoria do peso do produto"
+        tests:
+          - not_null
+
+  # =======================================================================
+  # FCT_ORDERS
+  # =======================================================================
+  - name: fct_orders
+    description: "Modelo de fatos dos pedidos"
+    columns:
+      - name: qtd_pedidos
+        description: "Quantidade de pedidos"
+        tests:
+          - not_null
+
+      - name: status
+        description: "Status do pedido"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['delivered','canceled']
+
+      - name: data_compra
+        description: "Data da compra do pedido"
+        tests:
+          - not_null
+
+  # =======================================================================
+  # FCT_DELIVERY
+  # =======================================================================
+  - name: fct_delivery
+    description: "Modelo de fatos dos entregas"
+    columns:
+      - name: order_id
+        description: "ID do pedido"
+        tests:
+          - not_null
+
+      - name: status
+        description: "Status da entrega do pedido"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments: 
+                values: ['delivered','canceled']
+
+      - name: data_compra
+        description: "Data do pedido"
+        tests:
+          - not_null
+
+  # =======================================================================
+  # FCT_PAYMENTS
+  # =======================================================================
+  - name: fct_payments
+    description: "Modelo de fatos dos pagamentos"
+    columns:
+      - name: tipo_pagamento
+        description: "Tipo do pagamento usado no pedido"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments: 
+                values: ['boleto', 'debit_card', 'voucher', 'credit_card']
+
+      - name: qtd_pagamento_metodo
+        description: "Quantidade de vezes que o metodo de pagamento foi utilizado"
+        tests:
+          - not_null
+      
+      - name: ticket_medio_metodo
+        description: "Valor médio que cada método de pagamento tem acumulado em pedidos"
+        tests:
+          - not_null
+
+      - name: total_pagamento_metodo
+        description: "Total de pagamentos cada método de pagamento tem acumulado em pedidos"
+        tests:
+          - not_null
+
+      - name: media_qtd_parcelas
+        description: "Média de parcelas de pagamentos cada método de pagamento tem acumulado em pedidos"
+        tests:
+          - not_null
+
