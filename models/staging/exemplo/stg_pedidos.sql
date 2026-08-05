@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT * FROM {{ source('raw', 'pedidos') }}
+    SELECT * FROM {{ source('exemplo', 'pedidos') }}
 )
 
 SELECT 
