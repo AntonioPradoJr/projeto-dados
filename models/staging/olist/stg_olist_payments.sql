@@ -2,14 +2,24 @@ WITH source AS(
     SELECT * FROM {{ source('olist', 'olist_orders') }}
 )
 
+{% set cast_float_col = ['price',
+                         'freight_value',
+                         'payment_value'
+                        ] 
+%}
+
+{% set cast_int_col = ['payment_sequential',
+                       'payment_installments'
+                      ]
+%}
 SELECT
     order_id,
     LOWER(TRIM(payment_type))                   AS payment_type,
-    CAST(payment_sequential AS INT64)           AS payment_sequential,
-    CAST(payment_installments AS INT64)         AS payment_installments,
-    CAST(price AS FLOAT64)                      AS price,
-    CAST(freight_value AS FLOAT64)              AS freight_value,
-    CAST(payment_value AS FLOAT64)              AS payment_value
-    
+    {% for col in cast_int_col %}
+        CAST({{ col }} AS INT64) AS {{ col }},
+    {% endfor %}
+    {% for col in cast_float_col %}
+        CAST({{ col }} AS FLOAT64) AS {{ col }}{% if not loop.last %},{% endif %}
+    {% endfor %}    
 FROM
     source
