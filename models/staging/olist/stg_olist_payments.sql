@@ -1,6 +1,3 @@
-WITH source AS(
-    SELECT * FROM {{ source('olist', 'olist_orders') }}
-)
 
 {% set cast_float_col = ['price',
                          'freight_value',
@@ -12,6 +9,11 @@ WITH source AS(
                        'payment_installments'
                       ]
 %}
+
+WITH source AS(
+    SELECT * FROM {{ source('olist', 'olist_orders') }}
+)
+
 SELECT
     order_id,
     LOWER(TRIM(payment_type))                   AS payment_type,
