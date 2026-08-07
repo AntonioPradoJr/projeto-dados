@@ -10,7 +10,7 @@ WITH source AS (
 SELECT
     seller_id,
     {% for col in lower_col %}
-        LOWER(TRIM({{ col }})) AS {{ col }},
+        {{ clean_text(col)}} AS {{ col }},
     {% endfor %}
     CAST(seller_zip_code_prefix AS INT64)   AS seller_zip_code_prefix
 FROM

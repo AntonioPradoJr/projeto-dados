@@ -16,12 +16,12 @@ WITH source AS(
 
 SELECT
     order_id,
-    LOWER(TRIM(payment_type))                   AS payment_type,
+    {{ clean_text('payment_type') }}              AS payment_type,
     {% for col in cast_int_col %}
         CAST({{ col }} AS INT64) AS {{ col }},
     {% endfor %}
     {% for col in cast_float_col %}
-        CAST({{ col }} AS FLOAT64) AS {{ col }}{% if not loop.last %},{% endif %}
+        {{ cast_float64(col) }}{% if not loop.last %},{% endif %}
     {% endfor %}    
 FROM
     source
