@@ -1,7 +1,5 @@
 
-{% set cast_float_col = ['price',
-                         'freight_value',
-                         'payment_value'
+{% set cast_float_col = ['payment_value'
                         ] 
 %}
 
@@ -14,7 +12,8 @@ WITH source AS(
     SELECT * FROM {{ source('olist', 'olist_orders') }}
 )
 
-SELECT
+SELECT DISTINCT
+    {{ dbt_utils.generate_surrogate_key(['order_id', 'payment_type', 'payment_sequential']) }} AS payment_id,
     order_id,
     {{ clean_text('payment_type') }}              AS payment_type,
     {% for col in cast_int_col %}
