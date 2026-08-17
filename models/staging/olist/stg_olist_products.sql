@@ -1,7 +1,3 @@
-WITH source AS(
-    SELECT * FROM {{ source('olist','olist_orders')}}
-)
-
 {% set cast_columns = ['product_name_lenght', 
                        'product_description_lenght', 
                        'product_photos_qty', 
@@ -11,11 +7,15 @@ WITH source AS(
                        'product_width_cm'
 ]  %}
 
+WITH source AS(
+    SELECT * FROM {{ source('olist','olist_orders')}}
+)
+
 SELECT
     product_id,
-    LOWER(product_category_name)                        AS product_category_name,
+    {{ clean_text('product_category_name') }}                           AS product_category_name,
     {% for col in cast_columns %}
-        CAST({{ col }} AS FLOAT64) AS {{ col }}{% if not loop.last  %},{% endif %}
+        {{ cast_float64(col) }}{% if not loop.last  %},{% endif %}
     {% endfor %}
 FROM
     source
