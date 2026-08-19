@@ -13,8 +13,11 @@ SELECT
     order_id, 
     order_item_id, 
     customer_id,
-    seller_id, 
+    seller_id,
+    product_id, 
     LOWER(TRIM(order_status))                   AS status,
+    CAST(price AS FLOAT64)                      AS price,
+    CAST(freight_value AS FLOAT64)              AS freight_value,
     {% for original, novo in date_columns %}
         DATE({{ original }}) AS {{ novo }} {% if not loop.last %},{% endif %} 
     {% endfor %}   
