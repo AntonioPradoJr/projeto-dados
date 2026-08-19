@@ -13,6 +13,7 @@ SELECT
     order_id, 
     order_item_id, 
     customer_id,
+    customer_unique_id, 
     seller_id,
     product_id, 
     LOWER(TRIM(order_status))                   AS status,

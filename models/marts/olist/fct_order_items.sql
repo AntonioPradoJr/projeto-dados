@@ -7,10 +7,11 @@ SELECT
     status,
     order_item_id, 
     customer_id,
+    customer_unique_id,
     seller_id,
     product_id,
     price,
-    freight_value
+    freight_value,
     data_compra, 
     data_aprovacao_pagamento,
     data_estimativa_entrega,
